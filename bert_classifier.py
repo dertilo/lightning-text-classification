@@ -8,7 +8,7 @@ import torch
 import torch.nn as nn
 from torch import optim
 from torch.utils.data import DataLoader
-from transformers import AutoModel
+from transformers import AutoModel, AutoConfig
 
 import pytorch_lightning as pl
 from bert_tokenizer import BERTTextEncoder
@@ -38,8 +38,11 @@ class BERTClassifier(pl.LightningModule):
         self.nr_frozen_epochs = hparams.nr_frozen_epochs
 
     def __build_model(self) -> None:
-        self.bert = AutoModel.from_pretrained(
+        self.config = AutoConfig.from_pretrained(
             self.hparams.encoder_model, output_hidden_states=True
+        )
+        self.bert = AutoModel.from_pretrained(
+            self.hparams.encoder_model, config=self.config
         )
 
         if self.hparams.encoder_model == "google/bert_uncased_L-2_H-128_A-2":

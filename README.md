@@ -11,7 +11,7 @@ used libraries:
 ```bash
 python training.py     --gpus 2     --batch_size 8     --loader_workers 4
 ```
-after 1hour on two 16GB-GPUs reached ~94% accuracy on `imdb_reviews_test.csv`
+after 1hour (2 epochs) on two 16GB-GPUs reached ~93% accuracy on `imdb_reviews_test.csv`
 
 using these params
 ```bash
